@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./Longpulling.css";
 
 export const Longpulling = () => {
   const [messages, setMessages] = useState([]);
@@ -13,7 +12,7 @@ export const Longpulling = () => {
   const subscribe = async () => {
     try {
       const { data } = await axios.get("http://localhost:5001/get-messages");
-      setMessages((prew) => [data, ...prew]);
+      setMessages((prev) => [data, ...prev]);
       await subscribe();
     } catch (e) {
       setTimeout(() => {
@@ -40,7 +39,7 @@ export const Longpulling = () => {
           />
           <button onClick={sendMessage}>Send</button>
         </div>
-        <div>
+        <div className="messages">
           {messages.map((mess) => (
             <div className="message" key={mess.id}>
               {mess.message}
